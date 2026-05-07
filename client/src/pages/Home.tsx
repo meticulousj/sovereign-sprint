@@ -1,4 +1,5 @@
 import { ArrowRight, Check, Clock3, Download, FileText, Flame, Gauge, ShieldCheck, Sparkles } from "lucide-react";
+import WaitlistForm from "@/components/WaitlistForm";
 
 /**
  * Design Philosophy Reminder — Neo-Brutalist Editorial Monasticism:
@@ -287,13 +288,7 @@ export default function Home() {
                 </div>
               ))}
             </div>
-            <a
-              href="mailto:hello@example.com?subject=Get%20The%2090-Day%20Sovereign%20Sprint"
-              className="group flex w-full items-center justify-center gap-3 border-2 border-ink bg-oxblood px-6 py-5 font-label text-sm uppercase tracking-[0.18em] text-paper shadow-[7px_7px_0_#161310] transition hover:-translate-y-1 hover:shadow-[10px_10px_0_#161310] focus:outline-none focus:ring-4 focus:ring-brass/35"
-            >
-              Request access <ArrowRight className="h-4 w-4 transition group-hover:translate-x-1" />
-            </a>
-            <p className="mt-5 flex items-center gap-2 text-sm leading-6 text-ink/62"><Clock3 className="h-4 w-4" /> Replace this mail link with your checkout or Gumroad URL when ready.</p>
+            <WaitlistForm />
           </aside>
         </div>
       </section>
