@@ -15,6 +15,7 @@ const assets = {
   milestones: "https://d2xsxph8kpxj0f.cloudfront.net/310519663638163440/RKGQXJWSfHbJcuYjLRyjU5/milestone-proof-map-eNrpx9jx4gnQDLvJDfx92w.webp",
   workbookPdf: "/manus-storage/90_day_sovereign_sprint_workbook_698ede0d.pdf",
   notionTemplate: "https://www.notion.so/templates/sovereign-sprint",
+  obsidianVault: "/manus-storage/90-Day-Sovereign-Sprint-Obsidian_d62a9717.zip",
 };
 
 const protocols = [
@@ -307,6 +308,14 @@ export default function Home() {
               >
                 <Download className="h-4 w-4" />
                 Duplicate Notion Template
+              </a>
+              <a
+                href={assets.obsidianVault}
+                download="90-Day-Sovereign-Sprint-Obsidian.zip"
+                className="group flex w-full items-center justify-center gap-3 border-2 border-brass bg-brass/12 px-6 py-4 font-label text-sm uppercase tracking-[0.18em] text-brass shadow-[5px_5px_0_#b08b43] transition duration-200 hover:-translate-y-1 hover:shadow-[7px_7px_0_#b08b43] focus:outline-none focus:ring-4 focus:ring-brass/35"
+              >
+                <Download className="h-4 w-4" />
+                Obsidian Vault (21 KB)
               </a>
             </div>
             <WaitlistForm />
