@@ -8,7 +8,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // In-memory storage for waitlist (fallback if Supabase not configured)
-const memoryWaitlist = new Set<string>();
+const memoryWaitlist = new Map<string, { name: string; created_at: string }>();
 
 // Initialize Supabase if credentials are provided
 const supabaseUrl = process.env.SUPABASE_URL;
@@ -25,11 +25,43 @@ if (!supabase) {
   );
 }
 
+// Admin password (use environment variable in production)
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "admin123";
+
 async function startServer() {
   const app = express();
   const server = createServer(app);
 
   app.use(express.json());
+
+  // Admin verification endpoint
+  app.post("/api/admin/verify", (req, res) => {
+    const { password } = req.body;
+
+    if (!password || password !== ADMIN_PASSWORD) {
+      return res.status(401).json({ message: "Invalid password" });
+    }
+
+    return res.json({ message: "Authenticated" });
+  });
+
+  // Get all subscribers
+  app.get("/api/admin/subscribers", (req, res) => {
+    if (supabase) {
+      // TODO: Fetch from Supabase when configured
+      return res.json({ subscribers: [] });
+    }
+
+    // Return in-memory waitlist as array
+    const subscribers = Array.from(memoryWaitlist.entries()).map(([email, data], idx) => ({
+      id: `${idx}`,
+      email,
+      name: data.name,
+      created_at: data.created_at,
+    }));
+
+    return res.json({ subscribers });
+  });
 
   // Waitlist API endpoint
   app.post("/api/waitlist", async (req, res) => {
@@ -67,12 +99,16 @@ async function startServer() {
         console.log(`[WAITLIST] ${name} (${normalizedEmail}) joined at ${new Date().toISOString()}`);
         return res.json({ message: "Successfully joined waitlist", email: normalizedEmail });
       } else {
-        // Fallback to in-memory storage
+        // Fallback to in-memory storage with name tracking
         if (memoryWaitlist.has(normalizedEmail)) {
           return res.status(409).json({ message: "Email already on waitlist" });
         }
 
-        memoryWaitlist.add(normalizedEmail);
+        memoryWaitlist.set(normalizedEmail, {
+          name,
+          created_at: new Date().toISOString(),
+        });
+
         console.log(`[WAITLIST] ${name} (${normalizedEmail}) joined at ${new Date().toISOString()}`);
         console.log(`[INFO] Total waitlist entries (in-memory): ${memoryWaitlist.size}`);
 
@@ -111,6 +147,7 @@ async function startServer() {
   server.listen(port, () => {
     console.log(`Server running on http://localhost:${port}/`);
     console.log(`Supabase status: ${supabase ? "configured" : "not configured (using in-memory storage)"}`);
+    console.log(`Admin password: ${ADMIN_PASSWORD === "admin123" ? "DEFAULT (change via ADMIN_PASSWORD env var)" : "custom"}`);
   });
 }
 
