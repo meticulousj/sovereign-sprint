@@ -1,4 +1,4 @@
-import { ArrowRight, Check, Clock3, Download, FileText, Flame, Gauge, ShieldCheck, Sparkles } from "lucide-react";
+import { ArrowRight, Check, Clock3, Download, FileText, Flame, Gauge, ShieldCheck } from "lucide-react";
 import WaitlistForm from "@/components/WaitlistForm";
 
 /**
@@ -13,6 +13,7 @@ const assets = {
   spread: "https://d2xsxph8kpxj0f.cloudfront.net/310519663638163440/RKGQXJWSfHbJcuYjLRyjU5/sovereign-workbook-spread-PQvAxxaTSm5zJEQTuaw6mC.webp",
   rituals: "https://d2xsxph8kpxj0f.cloudfront.net/310519663638163440/RKGQXJWSfHbJcuYjLRyjU5/ritual-protocol-cards-JwzM5JQJzQNjmyvAB5p2KL.webp",
   milestones: "https://d2xsxph8kpxj0f.cloudfront.net/310519663638163440/RKGQXJWSfHbJcuYjLRyjU5/milestone-proof-map-eNrpx9jx4gnQDLvJDfx92w.webp",
+  workbookPdf: "/manus-storage/90_day_sovereign_sprint_workbook_698ede0d.pdf",
 };
 
 const protocols = [
@@ -287,6 +288,16 @@ export default function Home() {
                   <span className="font-label text-xs uppercase tracking-[0.13em]">{title}</span>
                 </div>
               ))}
+            </div>
+            <div className="mb-6 border-b-2 border-ink pb-6">
+              <a
+                href={assets.workbookPdf}
+                download="90-Day-Sovereign-Sprint-Workbook.pdf"
+                className="group inline-flex w-full items-center justify-center gap-3 border-2 border-brass bg-brass/12 px-6 py-4 font-label text-sm uppercase tracking-[0.18em] text-brass shadow-[5px_5px_0_#b08b43] transition duration-200 hover:-translate-y-1 hover:shadow-[7px_7px_0_#b08b43] focus:outline-none focus:ring-4 focus:ring-brass/35"
+              >
+                <Download className="h-4 w-4" />
+                Preview PDF (1.6 MB)
+              </a>
             </div>
             <WaitlistForm />
           </aside>
