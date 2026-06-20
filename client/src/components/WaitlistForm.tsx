@@ -1,6 +1,5 @@
 import { ArrowRight, CheckCircle2, Loader2, AlertCircle } from "lucide-react";
 import { useState } from "react";
-import { supabase, addToWaitlist } from "@/lib/supabase";
 
 /**
  * Design Philosophy Reminder — Neo-Brutalist Editorial Monasticism:
@@ -24,22 +23,20 @@ export default function WaitlistForm({ onSuccess }: WaitlistFormProps) {
     setErrorMessage("");
 
     try {
-      if (supabase) {
-        // Use Supabase if configured
-        await addToWaitlist(email, name);
-      } else {
-        // Fallback to backend API if Supabase not configured
-        const response = await fetch("/api/waitlist", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, name }),
-        });
+      // Always use backend API for consistency
+      const response = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, name }),
+      });
 
-        if (!response.ok) {
-          const data = await response.json();
-          throw new Error(data.message || "Failed to join waitlist");
-        }
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.message || "Failed to join waitlist");
       }
+
+      const data = await response.json();
+      console.log("[WAITLIST SUCCESS]", data);
 
       setStatus("success");
       setEmail("");
@@ -51,6 +48,7 @@ export default function WaitlistForm({ onSuccess }: WaitlistFormProps) {
     } catch (error) {
       setStatus("error");
       setErrorMessage(error instanceof Error ? error.message : "Something went wrong");
+      console.error("[WAITLIST ERROR]", error);
     }
   };
 
