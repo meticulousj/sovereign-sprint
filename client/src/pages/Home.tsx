@@ -1,5 +1,7 @@
-import { ArrowRight, Check, Clock3, Download, FileText, Flame, Gauge, ShieldCheck } from "lucide-react";
+import { ArrowRight, Check, Clock3, Download, FileText, Flame, Gauge, ShieldCheck, Eye } from "lucide-react";
+import { useState } from "react";
 import WaitlistForm from "@/components/WaitlistForm";
+import PreviewModal from "@/components/PreviewModal";
 
 /**
  * Design Philosophy Reminder — Neo-Brutalist Editorial Monasticism:
@@ -7,6 +9,36 @@ import WaitlistForm from "@/components/WaitlistForm";
  * Use warm paper, charred ink, oxblood decisions, brass proof markers, offset editorial panels,
  * stamped labels, marginal notes, visible rules, and tactile workbook evidence throughout.
  */
+
+const previewSlides = [
+  {
+    id: "notion-dashboard",
+    title: "Notion Dashboard",
+    description:
+      "Your command center. Quick stats show days completed, weekly completion rate, consistency streak, and wins logged. Navigate to all databases from one central hub.",
+    image:
+      "https://d2xsxph8kpxj0f.cloudfront.net/310519663638163440/RKGQXJWSfHbJcuYjLRyjU5/notion-template-preview-dashboard-AQqkwr5AEeGuKpuvAvARbo.webp",
+    alt: "Notion Dashboard Preview",
+  },
+  {
+    id: "pdf-workbook",
+    title: "PDF Workbook Spread",
+    description:
+      "Premium printed experience. Left page shows the three daily rituals with checkboxes and note areas. Right page displays the five weekly reflection questions. Warm paper, charred ink, brass accents.",
+    image:
+      "https://d2xsxph8kpxj0f.cloudfront.net/310519663638163440/RKGQXJWSfHbJcuYjLRyjU5/pdf-workbook-preview-spread-XS9XDRqHyGdYYuskFh68no.webp",
+    alt: "PDF Workbook Preview",
+  },
+  {
+    id: "notion-database",
+    title: "Daily Log Database",
+    description:
+      "Track every day. Columns for date, day number, week, theme, daily score, rituals completed, and status. Multiple views: table, calendar, gallery, timeline. All data linked and searchable.",
+    image:
+      "https://d2xsxph8kpxj0f.cloudfront.net/310519663638163440/RKGQXJWSfHbJcuYjLRyjU5/notion-database-preview-AQqkwr5AEeGuKpuvAvARbo.webp",
+    alt: "Notion Daily Log Database Preview",
+  },
+];
 
 const assets = {
   hero: "https://d2xsxph8kpxj0f.cloudfront.net/310519663638163440/RKGQXJWSfHbJcuYjLRyjU5/sovereign-sprint-hero-dossier-CahF6DQWoUSHaeRcN9QDHh.webp",
@@ -82,6 +114,7 @@ function Stamp({ children }: { children: React.ReactNode }) {
 }
 
 export default function Home() {
+  const [isPreviewOpen, setIsPreviewOpen] = useState(false);
   return (
     <main className="min-h-screen overflow-hidden bg-paper text-ink">
       <section className="hero-shell relative min-h-screen border-b-2 border-ink bg-ink text-paper">
@@ -292,6 +325,13 @@ export default function Home() {
               ))}
             </div>
             <div className="mb-6 space-y-3 border-b-2 border-ink pb-6">
+              <button
+                onClick={() => setIsPreviewOpen(true)}
+                className="group flex w-full items-center justify-center gap-3 border-2 border-brass bg-brass/12 px-6 py-4 font-label text-sm uppercase tracking-[0.18em] text-brass shadow-[5px_5px_0_#b08b43] transition duration-200 hover:-translate-y-1 hover:shadow-[7px_7px_0_#b08b43] focus:outline-none focus:ring-4 focus:ring-brass/35"
+              >
+                <Eye className="h-4 w-4" />
+                Sneak Peek
+              </button>
               <a
                 href={assets.workbookPdf}
                 download="90-Day-Sovereign-Sprint-Workbook.pdf"
@@ -325,6 +365,13 @@ export default function Home() {
           </aside>
         </div>
       </section>
+
+      {/* Preview Modal */}
+      <PreviewModal
+        isOpen={isPreviewOpen}
+        onClose={() => setIsPreviewOpen(false)}
+        slides={previewSlides}
+      />
 
       <footer className="flex flex-col gap-4 border-t-2 border-paper/15 bg-ink px-5 py-8 text-paper/60 md:flex-row md:items-center md:justify-between md:px-10 lg:px-16">
         <p className="font-label text-xs uppercase tracking-[0.22em]">The 90-Day Sovereign Sprint</p>
