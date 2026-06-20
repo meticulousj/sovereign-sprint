@@ -1,0 +1,455 @@
+{
+  "name": "90-Day Sovereign Sprint",
+  "description": "A focused workbook system for 90 days of disciplined self-leadership with daily rituals, weekly reflection, and milestone proof.",
+  "pages": [
+    {
+      "id": "dashboard",
+      "title": "Dashboard",
+      "type": "overview",
+      "description": "Central hub for the entire 90-day sprint",
+      "sections": [
+        {
+          "name": "Sprint Overview",
+          "content": [
+            "Title: 90-Day Sovereign Sprint",
+            "Start Date: [User input]",
+            "End Date: [Auto-calculated]",
+            "Current Day: [Formula]",
+            "Days Remaining: [Formula]"
+          ]
+        },
+        {
+          "name": "Quick Stats",
+          "metrics": [
+            "Days Completed / 90",
+            "Weekly Completion Rate (%)",
+            "Consistency Streak (days)",
+            "Wins Logged (total)",
+            "Patterns Identified"
+          ]
+        },
+        {
+          "name": "This Week",
+          "content": [
+            "Week Number: [Auto]",
+            "Theme: [From Seasonal Arc]",
+            "Weekly Focus: [From latest reflection]",
+            "Rituals Completed This Week: [Counter]"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "daily-log",
+      "title": "Daily Log",
+      "type": "database",
+      "description": "Record daily prompts, rituals, and reflections",
+      "properties": {
+        "Date": {
+          "type": "date",
+          "required": true
+        },
+        "Day Number": {
+          "type": "number",
+          "formula": "dateBetween(prop('End Date'), prop('Start Date'), 'days')"
+        },
+        "Daily Question": {
+          "type": "text",
+          "description": "The day's opening prompt"
+        },
+        "Morning Ignition": {
+          "type": "checkbox",
+          "description": "Completed?"
+        },
+        "Morning Notes": {
+          "type": "text",
+          "description": "What set the tone?"
+        },
+        "Midday Recalibration": {
+          "type": "checkbox",
+          "description": "Completed?"
+        },
+        "Midday Notes": {
+          "type": "text",
+          "description": "What shifted?"
+        },
+        "Evening Audit": {
+          "type": "checkbox",
+          "description": "Completed?"
+        },
+        "Evening Notes": {
+          "type": "text",
+          "description": "What was executed?"
+        },
+        "Daily Score": {
+          "type": "number",
+          "description": "1-10 self-rating"
+        },
+        "Wins Logged": {
+          "type": "text",
+          "description": "Proof of action"
+        },
+        "Patterns Noticed": {
+          "type": "text",
+          "description": "What's repeating?"
+        },
+        "Status": {
+          "type": "select",
+          "options": ["On Track", "Slipped", "Recovered", "Breakthrough"]
+        },
+        "Week Number": {
+          "type": "number",
+          "description": "Link to Weekly Reflection"
+        }
+      },
+      "views": [
+        {
+          "name": "Calendar View",
+          "type": "calendar",
+          "property": "Date"
+        },
+        {
+          "name": "This Week",
+          "type": "table",
+          "filter": "Date is this week"
+        },
+        {
+          "name": "Consistency Tracker",
+          "type": "table",
+          "sort": "Date descending"
+        },
+        {
+          "name": "Wins Archive",
+          "type": "gallery",
+          "filter": "Wins Logged is not empty"
+        }
+      ]
+    },
+    {
+      "id": "weekly-reflection",
+      "title": "Weekly Reflection",
+      "type": "database",
+      "description": "Deep weekly audit and planning",
+      "properties": {
+        "Week Number": {
+          "type": "number",
+          "required": true
+        },
+        "Week Start Date": {
+          "type": "date",
+          "required": true
+        },
+        "Question 01: Top 3 Wins": {
+          "type": "text"
+        },
+        "Question 02: Where I Broke My Word": {
+          "type": "text"
+        },
+        "Question 03: Patterns I'm Proud Of": {
+          "type": "text"
+        },
+        "Question 04: Patterns That Need to Die": {
+          "type": "text"
+        },
+        "Question 05: Single Focus for Next Week": {
+          "type": "text"
+        },
+        "Weekly Score": {
+          "type": "number",
+          "description": "1-100"
+        },
+        "Consistency Rate": {
+          "type": "number",
+          "description": "% of rituals completed"
+        },
+        "Key Lesson": {
+          "type": "text",
+          "description": "One sentence takeaway"
+        },
+        "Mood": {
+          "type": "select",
+          "options": ["Energized", "Steady", "Struggling", "Recovering"]
+        },
+        "Related Daily Entries": {
+          "type": "relation",
+          "database": "Daily Log"
+        }
+      },
+      "views": [
+        {
+          "name": "Timeline",
+          "type": "table",
+          "sort": "Week Number ascending"
+        },
+        {
+          "name": "Insights",
+          "type": "table",
+          "sort": "Weekly Score descending"
+        },
+        {
+          "name": "Mood Arc",
+          "type": "table",
+          "group": "Mood"
+        }
+      ]
+    },
+    {
+      "id": "milestones",
+      "title": "30/60/90 Milestones",
+      "type": "database",
+      "description": "Track proof at each checkpoint",
+      "properties": {
+        "Milestone": {
+          "type": "select",
+          "options": ["Day 30", "Day 60", "Day 90"],
+          "required": true
+        },
+        "Checkpoint Date": {
+          "type": "date",
+          "required": true
+        },
+        "Status": {
+          "type": "select",
+          "options": ["Pending", "Completed", "Reviewed"]
+        },
+        "Foundation Proof": {
+          "type": "text",
+          "description": "Day 30 — What's built?"
+        },
+        "Momentum Proof": {
+          "type": "text",
+          "description": "Day 60 — What's compounding?"
+        },
+        "Mastery Proof": {
+          "type": "text",
+          "description": "Day 90 — What's owned?"
+        },
+        "Evidence": {
+          "type": "file",
+          "description": "Photos, screenshots, documents"
+        },
+        "Reflection": {
+          "type": "text",
+          "description": "What this milestone means"
+        },
+        "Next Season Plan": {
+          "type": "text",
+          "description": "What comes after day 90?"
+        }
+      },
+      "views": [
+        {
+          "name": "Milestone Board",
+          "type": "kanban",
+          "group": "Status"
+        },
+        {
+          "name": "Proof Gallery",
+          "type": "gallery",
+          "property": "Evidence"
+        }
+      ]
+    },
+    {
+      "id": "seasonal-arc",
+      "title": "Seasonal Arc",
+      "type": "database",
+      "description": "Track the 12-week themes and focus areas",
+      "properties": {
+        "Week Number": {
+          "type": "number",
+          "required": true
+        },
+        "Theme": {
+          "type": "text",
+          "required": true
+        },
+        "Description": {
+          "type": "text"
+        },
+        "Key Ritual": {
+          "type": "select",
+          "options": ["Morning Ignition", "Midday Recalibration", "Evening Audit"]
+        },
+        "Challenge": {
+          "type": "text"
+        },
+        "Resources": {
+          "type": "text"
+        },
+        "Completed": {
+          "type": "checkbox"
+        }
+      },
+      "defaultData": [
+        {"week": 1, "theme": "Identity Friction"},
+        {"week": 2, "theme": "Energy Command"},
+        {"week": 3, "theme": "Focus Containment"},
+        {"week": 4, "theme": "Execution Standards"},
+        {"week": 5, "theme": "Distraction Audit"},
+        {"week": 6, "theme": "Environment Design"},
+        {"week": 7, "theme": "Trust Repair"},
+        {"week": 8, "theme": "Momentum Compounding"},
+        {"week": 9, "theme": "Proof Integration"},
+        {"week": 10, "theme": "Season Closure"},
+        {"week": 11, "theme": "Next-Season Map"},
+        {"week": 12, "theme": "Sovereign Handoff"}
+      ]
+    },
+    {
+      "id": "wins-archive",
+      "title": "Wins Archive",
+      "type": "database",
+      "description": "Celebrate and track all wins throughout the sprint",
+      "properties": {
+        "Date": {
+          "type": "date",
+          "required": true
+        },
+        "Win": {
+          "type": "text",
+          "required": true
+        },
+        "Category": {
+          "type": "select",
+          "options": ["Health", "Work", "Relationships", "Discipline", "Learning", "Other"]
+        },
+        "Size": {
+          "type": "select",
+          "options": ["Small", "Medium", "Large"]
+        },
+        "Related Week": {
+          "type": "relation",
+          "database": "Weekly Reflection"
+        },
+        "Impact": {
+          "type": "text"
+        },
+        "Proof": {
+          "type": "file"
+        }
+      },
+      "views": [
+        {
+          "name": "Gallery",
+          "type": "gallery",
+          "property": "Proof"
+        },
+        {
+          "name": "Timeline",
+          "type": "timeline",
+          "property": "Date"
+        },
+        {
+          "name": "By Category",
+          "type": "table",
+          "group": "Category"
+        }
+      ]
+    },
+    {
+      "id": "patterns-tracker",
+      "title": "Patterns Tracker",
+      "type": "database",
+      "description": "Identify and monitor recurring patterns",
+      "properties": {
+        "Pattern": {
+          "type": "text",
+          "required": true
+        },
+        "Type": {
+          "type": "select",
+          "options": ["Proud Of", "Needs to Die", "Neutral"],
+          "required": true
+        },
+        "First Noticed": {
+          "type": "date"
+        },
+        "Frequency": {
+          "type": "select",
+          "options": ["Daily", "Weekly", "Situational"]
+        },
+        "Evidence": {
+          "type": "text"
+        },
+        "Action": {
+          "type": "text"
+        },
+        "Status": {
+          "type": "select",
+          "options": ["Emerging", "Established", "Shifting", "Mastered"]
+        }
+      },
+      "views": [
+        {
+          "name": "Active Patterns",
+          "type": "table",
+          "filter": "Status is not Mastered"
+        },
+        {
+          "name": "Evolution",
+          "type": "timeline",
+          "property": "First Noticed"
+        }
+      ]
+    },
+    {
+      "id": "settings",
+      "title": "Settings & Reference",
+      "type": "reference",
+      "description": "Store sprint parameters and guidance",
+      "sections": [
+        {
+          "name": "Sprint Configuration",
+          "content": [
+            "Start Date: [User input]",
+            "End Date: [Auto-calculated]",
+            "Timezone: [User input]",
+            "Notification Time: [User preference]"
+          ]
+        },
+        {
+          "name": "Daily Question Prompts",
+          "content": "All 90 daily questions (one per day)"
+        },
+        {
+          "name": "Three Rituals Guide",
+          "subsections": [
+            "Morning Ignition: Full description + examples",
+            "Midday Recalibration: Full description + examples",
+            "Evening Audit: Full description + examples"
+          ]
+        },
+        {
+          "name": "Weekly Reflection Instructions",
+          "content": "How to answer each of the 5 questions"
+        },
+        {
+          "name": "FAQ",
+          "content": "Common questions and answers"
+        }
+      ]
+    }
+  ],
+  "dailyQuestions": [
+    "What's one non-negotiable I will complete today no matter what?",
+    "Where am I negotiating against my own standard?",
+    "What will set the tone for the rest of my day?",
+    "What did I execute well? What will I sharpen tomorrow?",
+    "What gets measured gets mastered. What am I measuring today?"
+  ],
+  "weeklyThemes": [
+    "Identity Friction",
+    "Energy Command",
+    "Focus Containment",
+    "Execution Standards",
+    "Distraction Audit",
+    "Environment Design",
+    "Trust Repair",
+    "Momentum Compounding",
+    "Proof Integration",
+    "Season Closure",
+    "Next-Season Map",
+    "Sovereign Handoff"
+  ]
+}
