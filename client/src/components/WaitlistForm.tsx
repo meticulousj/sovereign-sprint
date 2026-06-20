@@ -1,5 +1,6 @@
 import { ArrowRight, CheckCircle2, Loader2, AlertCircle } from "lucide-react";
 import { useState } from "react";
+import { supabase, addToWaitlist } from "@/lib/supabase";
 
 /**
  * Design Philosophy Reminder — Neo-Brutalist Editorial Monasticism:
@@ -23,15 +24,21 @@ export default function WaitlistForm({ onSuccess }: WaitlistFormProps) {
     setErrorMessage("");
 
     try {
-      const response = await fetch("/api/waitlist", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, name }),
-      });
+      if (supabase) {
+        // Use Supabase if configured
+        await addToWaitlist(email, name);
+      } else {
+        // Fallback to backend API if Supabase not configured
+        const response = await fetch("/api/waitlist", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, name }),
+        });
 
-      if (!response.ok) {
-        const data = await response.json();
-        throw new Error(data.message || "Failed to join waitlist");
+        if (!response.ok) {
+          const data = await response.json();
+          throw new Error(data.message || "Failed to join waitlist");
+        }
       }
 
       setStatus("success");
