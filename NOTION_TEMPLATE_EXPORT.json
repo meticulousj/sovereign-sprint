@@ -1,0 +1,457 @@
+{
+  "workspace": {
+    "name": "90-Day Sovereign Sprint",
+    "icon": "📋",
+    "description": "A complete system for 90 days of recorded proof. Daily protocols, weekly reflections, milestone checkpoints, and pattern tracking."
+  },
+  "pages": [
+    {
+      "id": "dashboard",
+      "title": "Dashboard",
+      "type": "page",
+      "icon": "📊",
+      "content": "# 90-Day Sovereign Sprint Dashboard\n\n## Quick Stats\n- Days Completed: [Database Formula]\n- Weekly Completion Rate: [Database Formula]\n- Consistency Streak: [Database Formula]\n- Wins Logged: [Database Formula]\n- Patterns Identified: [Database Formula]\n\n## This Week\n- Week Number: [Manual or Formula]\n- Theme: [Linked to Weekly Reflections]\n- Focus: [From latest weekly reflection]\n- Rituals This Week: [Database Formula]\n\n## Navigation\n- Daily Log\n- Weekly Reflections\n- Milestones\n- Wins Archive\n- Patterns Tracker\n\n## Recent Wins\n[Embed: Wins database, filtered to last 7 days]\n\n## Current Focus\n[Text block for user to fill in]"
+    }
+  ],
+  "databases": [
+    {
+      "id": "daily-log",
+      "title": "Daily Log",
+      "icon": "📓",
+      "description": "Daily entries with morning ignition, midday recalibration, and evening audit",
+      "properties": [
+        {
+          "name": "Date",
+          "type": "date",
+          "required": true
+        },
+        {
+          "name": "Day",
+          "type": "number",
+          "description": "Day number (1-90)"
+        },
+        {
+          "name": "Week",
+          "type": "number",
+          "description": "Week number (1-13)"
+        },
+        {
+          "name": "Theme",
+          "type": "select",
+          "options": [
+            "Identity Friction",
+            "Energy Command",
+            "Focus Containment",
+            "Execution Standards",
+            "Distraction Audit",
+            "Environment Design",
+            "Trust Repair",
+            "Momentum Compounding",
+            "Proof Integration",
+            "Season Closure",
+            "Next-Season Map",
+            "Sovereign Handoff",
+            "Final Integration"
+          ]
+        },
+        {
+          "name": "Daily Question",
+          "type": "text"
+        },
+        {
+          "name": "Morning Ignition",
+          "type": "text"
+        },
+        {
+          "name": "Midday Recalibration",
+          "type": "text"
+        },
+        {
+          "name": "Evening Audit",
+          "type": "text"
+        },
+        {
+          "name": "Daily Score",
+          "type": "number",
+          "description": "Rating 1-10"
+        },
+        {
+          "name": "Rituals Completed",
+          "type": "checkbox"
+        },
+        {
+          "name": "Wins",
+          "type": "text"
+        },
+        {
+          "name": "Patterns",
+          "type": "text"
+        },
+        {
+          "name": "Energy Level",
+          "type": "select",
+          "options": ["Low", "Medium", "High"]
+        },
+        {
+          "name": "Mood",
+          "type": "select",
+          "options": ["Energized", "Steady", "Struggling", "Recovering"]
+        },
+        {
+          "name": "Status",
+          "type": "select",
+          "options": ["On-track", "Struggling", "Off-track"]
+        },
+        {
+          "name": "Tags",
+          "type": "multi_select",
+          "options": [
+            "#morning-ignition",
+            "#midday-recalibration",
+            "#evening-audit",
+            "#win",
+            "#pattern",
+            "#breakthrough",
+            "#struggle"
+          ]
+        }
+      ],
+      "views": [
+        {
+          "name": "Calendar",
+          "type": "calendar",
+          "group_by": "Date"
+        },
+        {
+          "name": "Timeline",
+          "type": "timeline",
+          "group_by": "Date"
+        },
+        {
+          "name": "Gallery",
+          "type": "gallery"
+        },
+        {
+          "name": "By Week",
+          "type": "table",
+          "group_by": "Week"
+        },
+        {
+          "name": "By Status",
+          "type": "table",
+          "group_by": "Status"
+        }
+      ]
+    },
+    {
+      "id": "weekly-reflections",
+      "title": "Weekly Reflections",
+      "icon": "📊",
+      "description": "Weekly reflection entries with 5 key questions",
+      "properties": [
+        {
+          "name": "Week",
+          "type": "number",
+          "required": true
+        },
+        {
+          "name": "Week Start Date",
+          "type": "date"
+        },
+        {
+          "name": "Theme",
+          "type": "select",
+          "options": [
+            "Identity Friction",
+            "Energy Command",
+            "Focus Containment",
+            "Execution Standards",
+            "Distraction Audit",
+            "Environment Design",
+            "Trust Repair",
+            "Momentum Compounding",
+            "Proof Integration",
+            "Season Closure",
+            "Next-Season Map",
+            "Sovereign Handoff",
+            "Final Integration"
+          ]
+        },
+        {
+          "name": "Top 3 Wins",
+          "type": "text"
+        },
+        {
+          "name": "Broke My Word",
+          "type": "text"
+        },
+        {
+          "name": "Patterns Proud Of",
+          "type": "text"
+        },
+        {
+          "name": "Patterns to Die",
+          "type": "text"
+        },
+        {
+          "name": "Single Focus",
+          "type": "text"
+        },
+        {
+          "name": "Weekly Score",
+          "type": "number"
+        },
+        {
+          "name": "Consistency Rate",
+          "type": "number"
+        },
+        {
+          "name": "Key Lesson",
+          "type": "text"
+        },
+        {
+          "name": "Mood Arc",
+          "type": "select",
+          "options": ["Energized", "Steady", "Struggling", "Recovering"]
+        },
+        {
+          "name": "Status",
+          "type": "select",
+          "options": ["Complete", "In Progress", "Pending"]
+        }
+      ],
+      "views": [
+        {
+          "name": "Timeline",
+          "type": "timeline",
+          "group_by": "Week Start Date"
+        },
+        {
+          "name": "Gallery",
+          "type": "gallery"
+        },
+        {
+          "name": "By Theme",
+          "type": "table",
+          "group_by": "Theme"
+        }
+      ]
+    },
+    {
+      "id": "milestones",
+      "title": "Milestones",
+      "icon": "🏁",
+      "description": "30/60/90 day checkpoint entries",
+      "properties": [
+        {
+          "name": "Milestone",
+          "type": "select",
+          "options": ["Day 30", "Day 60", "Day 90"],
+          "required": true
+        },
+        {
+          "name": "Checkpoint Date",
+          "type": "date"
+        },
+        {
+          "name": "Foundation Proof",
+          "type": "text"
+        },
+        {
+          "name": "Momentum Proof",
+          "type": "text"
+        },
+        {
+          "name": "Mastery Proof",
+          "type": "text"
+        },
+        {
+          "name": "Daily Habits",
+          "type": "text"
+        },
+        {
+          "name": "Rituals Status",
+          "type": "checkbox"
+        },
+        {
+          "name": "Environmental Changes",
+          "type": "text"
+        },
+        {
+          "name": "Wins Summary",
+          "type": "text"
+        },
+        {
+          "name": "Reflection",
+          "type": "text"
+        },
+        {
+          "name": "Next 30 Days",
+          "type": "text"
+        },
+        {
+          "name": "Status",
+          "type": "select",
+          "options": ["Pending", "In Progress", "Complete"]
+        }
+      ],
+      "views": [
+        {
+          "name": "Timeline",
+          "type": "timeline",
+          "group_by": "Checkpoint Date"
+        },
+        {
+          "name": "Gallery",
+          "type": "gallery"
+        }
+      ]
+    },
+    {
+      "id": "wins-archive",
+      "title": "Wins Archive",
+      "icon": "🏆",
+      "description": "All wins logged throughout the sprint",
+      "properties": [
+        {
+          "name": "Date",
+          "type": "date",
+          "required": true
+        },
+        {
+          "name": "Win",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "Category",
+          "type": "select",
+          "options": ["Health", "Work", "Relationships", "Learning", "Discipline"]
+        },
+        {
+          "name": "Size",
+          "type": "select",
+          "options": ["Small", "Medium", "Large"]
+        },
+        {
+          "name": "Evidence",
+          "type": "text"
+        },
+        {
+          "name": "Tags",
+          "type": "multi_select",
+          "options": ["#win", "#breakthrough", "#milestone"]
+        }
+      ],
+      "views": [
+        {
+          "name": "By Category",
+          "type": "table",
+          "group_by": "Category"
+        },
+        {
+          "name": "By Size",
+          "type": "table",
+          "group_by": "Size"
+        },
+        {
+          "name": "Timeline",
+          "type": "timeline",
+          "group_by": "Date"
+        },
+        {
+          "name": "Gallery",
+          "type": "gallery"
+        }
+      ]
+    },
+    {
+      "id": "patterns-tracker",
+      "title": "Patterns Tracker",
+      "icon": "🔄",
+      "description": "Track recurring patterns throughout the sprint",
+      "properties": [
+        {
+          "name": "Pattern",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "Type",
+          "type": "select",
+          "options": ["Proud Of", "Needs to Die", "Neutral"]
+        },
+        {
+          "name": "Frequency",
+          "type": "select",
+          "options": ["Daily", "Weekly", "Situational"]
+        },
+        {
+          "name": "Evidence",
+          "type": "text"
+        },
+        {
+          "name": "Action",
+          "type": "text"
+        },
+        {
+          "name": "Status",
+          "type": "select",
+          "options": ["Emerging", "Established", "Shifting", "Mastered"]
+        },
+        {
+          "name": "First Noticed",
+          "type": "date"
+        },
+        {
+          "name": "Last Updated",
+          "type": "date"
+        },
+        {
+          "name": "Tags",
+          "type": "multi_select",
+          "options": ["#pattern", "#proud-of", "#needs-to-die"]
+        }
+      ],
+      "views": [
+        {
+          "name": "By Type",
+          "type": "table",
+          "group_by": "Type"
+        },
+        {
+          "name": "By Status",
+          "type": "table",
+          "group_by": "Status"
+        },
+        {
+          "name": "Timeline",
+          "type": "timeline",
+          "group_by": "First Noticed"
+        },
+        {
+          "name": "Gallery",
+          "type": "gallery"
+        }
+      ]
+    }
+  ],
+  "resources": [
+    {
+      "title": "Daily Questions",
+      "description": "90 daily prompts to crack each day open"
+    },
+    {
+      "title": "Three Rituals Guide",
+      "description": "Morning Ignition (5 min), Midday Recalibration (3 min), Evening Audit (7 min)"
+    },
+    {
+      "title": "Weekly Framework",
+      "description": "5 questions, 15 minutes, zero theatre"
+    },
+    {
+      "title": "Milestone Checkpoints",
+      "description": "Day 30, 60, 90 proof documentation"
+    }
+  ]
+}

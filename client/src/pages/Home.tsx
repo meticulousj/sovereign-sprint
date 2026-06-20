@@ -309,6 +309,9 @@ export default function Home() {
                 <Download className="h-4 w-4" />
                 Duplicate Notion Template
               </a>
+              <div className="text-center text-xs text-ink/60 border-t border-ink/20 pt-3">
+                <p>👉 <a href="#" className="underline hover:text-ink">Setup Guide</a> for building your own template</p>
+              </div>
               <a
                 href={assets.obsidianVault}
                 download="90-Day-Sovereign-Sprint-Obsidian.zip"
