@@ -3,6 +3,7 @@ import { useState } from "react";
 import WaitlistForm from "@/components/WaitlistForm";
 import PreviewModal from "@/components/PreviewModal";
 import RitualsWalkthrough from "@/components/RitualsWalkthrough";
+import FAQAccordion from "@/components/FAQAccordion";
 
 /**
  * Design Philosophy Reminder — Neo-Brutalist Editorial Monasticism:
@@ -219,6 +220,8 @@ export default function Home() {
       </section>
 
       <RitualsWalkthrough />
+
+      <FAQAccordion />
 
       <section id="inside" className="border-b-2 border-ink bg-paper px-5 py-20 md:px-10 lg:px-16">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.05fr_0.95fr]">
