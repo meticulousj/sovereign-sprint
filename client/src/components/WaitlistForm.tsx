@@ -23,19 +23,48 @@ export default function WaitlistForm({ onSuccess }: WaitlistFormProps) {
     setErrorMessage("");
 
     try {
+      // Validate inputs
+      if (!name.trim()) {
+        throw new Error("Please enter your name");
+      }
+      if (!email.trim()) {
+        throw new Error("Please enter your email");
+      }
+
       // Always use backend API for consistency
       const response = await fetch("/api/waitlist", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, name }),
+        body: JSON.stringify({ email: email.trim(), name: name.trim() }),
       });
 
+      // Handle non-OK responses
       if (!response.ok) {
-        const data = await response.json();
-        throw new Error(data.message || "Failed to join waitlist");
+        let errorMsg = "Failed to join waitlist";
+        try {
+          const errorData = await response.json();
+          errorMsg = errorData.message || errorMsg;
+        } catch {
+          // If response body is not JSON, use status text
+          errorMsg = response.statusText || errorMsg;
+        }
+        throw new Error(errorMsg);
       }
 
-      const data = await response.json();
+      // Parse success response with fallback
+      let data;
+      try {
+        const text = await response.text();
+        if (text) {
+          data = JSON.parse(text);
+        } else {
+          data = { message: "Successfully joined waitlist" };
+        }
+      } catch {
+        // If response is empty or not JSON, treat as success
+        data = { message: "Successfully joined waitlist" };
+      }
+
       console.log("[WAITLIST SUCCESS]", data);
 
       setStatus("success");
